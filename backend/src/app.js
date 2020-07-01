@@ -13,9 +13,11 @@ const io = socketio(server);
 app.use(cors());
 
 
-io.on("connection", () => {
+io.on("connection", (socket) => {
     console.log("New connection");
-})
+
+    socket.emit("testing", "String Data");
+});
 
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
