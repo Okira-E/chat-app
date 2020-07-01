@@ -6,7 +6,7 @@ import { Observable, Subscriber } from 'rxjs';
   providedIn: 'root'
 })
 export class WebsocketService {
-  private socket: any;
+  private socket;
   readonly uri: string = "http://localhost:3000";
 
   constructor() {
@@ -24,5 +24,4 @@ export class WebsocketService {
   emit(eventName: string, data: any) {
     this.socket.emit(eventName, data);
   }
-
 }
