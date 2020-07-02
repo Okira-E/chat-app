@@ -13,10 +13,13 @@ const io = socketio(server);
 app.use(cors());
 
 
+let count = 0;
 io.on("connection", (socket) => {
     console.log("New connection");
 
-    socket.emit("testing", "String Data");
+    socket.on("increment", () => {
+        socket.emit("getData", ++count);
+    });
 });
 
 const PORT = process.env.PORT || 3000;
