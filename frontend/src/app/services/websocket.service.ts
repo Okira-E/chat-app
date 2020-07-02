@@ -15,13 +15,13 @@ export class WebsocketService {
 
   listen(eventName: string) {
     return new Observable((subscriber) => {
-      this.socket.on("testing", (data) => {
+      this.socket.on(eventName, (data) => {
         subscriber.next(data);
       });
     });
   }
 
-  emit(eventName: string, data: any) {
+  emit(eventName: string, data?: any) {
     this.socket.emit(eventName, data);
   }
 }
