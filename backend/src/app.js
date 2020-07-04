@@ -13,12 +13,15 @@ const io = socketio(server);
 app.use(cors());
 
 
-let count = 0;
+let chat = [];
 io.on("connection", (socket) => {
     console.log("New connection");
 
-    socket.on("increment", () => {
-        socket.emit("getData", ++count);
+    socket.emit("getData", chat);
+
+    socket.on("message", (data) => {
+        chat.push(data);
+        io.emit("getData", data);
     });
 });
 
