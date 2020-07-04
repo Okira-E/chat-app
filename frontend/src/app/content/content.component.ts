@@ -12,9 +12,14 @@ export class ContentComponent implements OnInit {
   constructor(private websocketService: WebsocketService) { }
 
   ngOnInit(): void {
-    this.websocketService.listen('getData').subscribe((data) => {
-      console.log('ngOnInit ran');
-      console.log(data);
+    this.websocketService.listen('getData').subscribe((data: []) => {
+      if (typeof data === "object") {
+        for (let i = 0; i < data.length; ++i) {
+          console.log(data[i], '\n');
+        }
+      } else {
+        console.log(data);
+      }
     });
   }
 
