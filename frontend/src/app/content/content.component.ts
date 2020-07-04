@@ -21,5 +21,4 @@ export class ContentComponent implements OnInit {
   sendMessage(form: NgForm):void {
     this.websocketService.emit("message", form.value.message);
   }
-
 }
