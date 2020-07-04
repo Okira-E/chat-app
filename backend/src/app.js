@@ -18,7 +18,6 @@ io.on("connection", (socket) => {
     console.log("New connection");
 
     socket.emit("getData", chat);
-
     socket.on("message", (data) => {
         chat.push(data);
         io.emit("getData", data);
