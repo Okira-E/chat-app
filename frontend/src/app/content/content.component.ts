@@ -1,5 +1,5 @@
 import { WebsocketService } from './../services/websocket.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 
@@ -8,12 +8,14 @@ import { NgForm } from '@angular/forms';
   templateUrl: './content.component.html',
   styleUrls: ['./content.component.css']
 })
-export class ContentComponent implements OnInit {
+export class ContentComponent implements OnInit, OnDestroy {
+  private on;
 
   constructor(private websocketService: WebsocketService) { }
 
   ngOnInit(): void {
-    this.websocketService.listen('getData').subscribe((data: []) => {
+    this.on = this.websocketService.listen('getData');
+    this.on.subscribe((data: []) => {
       if (typeof data === "object") {
         for (let i = 0; i < data.length; ++i) {
           console.log(data[i], '\n');
@@ -26,5 +28,9 @@ export class ContentComponent implements OnInit {
 
   sendMessage(form: NgForm):void {
     this.websocketService.emit("message", form.value.message);
+  }
+
+  ngOnDestroy(): void {
+    this.on.unsubscribe();
   }
 }
