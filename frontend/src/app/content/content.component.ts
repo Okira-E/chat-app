@@ -11,10 +11,11 @@ import { NgForm } from '@angular/forms';
 export class ContentComponent implements OnInit, OnDestroy {
   private on;
 
-  constructor(private websocketService: WebsocketService) { }
+  constructor(private websocketService: WebsocketService) {
+    this.on = this.websocketService.listen('getData');
+  }
 
   ngOnInit(): void {
-    this.on = this.websocketService.listen('getData');
     this.on.subscribe((data: []) => {
       if (typeof data === "object") {
         for (let i = 0; i < data.length; ++i) {
