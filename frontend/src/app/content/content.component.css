@@ -24,6 +24,11 @@ form button {
   border-radius: 3px;
 }
 
+form button:hover {
+  color: #fff;
+  background: #000;
+}
+
 .container {
   margin: 40px 110px;
 }
