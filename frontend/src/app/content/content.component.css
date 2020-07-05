@@ -18,6 +18,7 @@ form button {
   padding: 10px;
   font-size: large;
   background: #fff;
+  cursor: pointer;
   border: #000 solid 1px;
   border-radius: 3px;
 }
