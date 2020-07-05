@@ -9,6 +9,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./content.component.css']
 })
 export class ContentComponent implements OnInit, OnDestroy {
+  public chat: string[];
   private on;
 
   constructor(private websocketService: WebsocketService) {
@@ -18,11 +19,9 @@ export class ContentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.on.subscribe((data: []) => {
       if (typeof data === "object") {
-        for (let i = 0; i < data.length; ++i) {
-          console.log(data[i], '\n');
-        }
+        this.chat = data;
       } else {
-        console.log(data);
+        this.chat.push(data);
       }
     });
   }
