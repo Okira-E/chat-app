@@ -10,19 +10,24 @@ import { NgForm } from '@angular/forms';
 })
 export class ContentComponent implements OnInit, OnDestroy {
   public chat: string[];
-  private on;
+  private onGetData: any;
+  private onDisconnect: any;
 
   constructor(private websocketService: WebsocketService) {
-    this.on = this.websocketService.listen('getData');
+    this.onGetData = this.websocketService.listen('getData');
+    this.onDisconnect = this.websocketService.listen("exit");
   }
 
   ngOnInit(): void {
-    this.on.subscribe((data: []) => {
+    this.onGetData.subscribe((data: []) => {
       if (typeof data === "object") {
         this.chat = data;
       } else {
         this.chat.push(data);
       }
+    });
+    this.onDisconnect.subscribe((message: string) => {
+      console.log(message);
     });
   }
 
@@ -31,6 +36,7 @@ export class ContentComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.on.unsubscribe();
+    this.onGetData.unsubscribe();
+    this.onDisconnect.unsubscribe();
   }
 }
