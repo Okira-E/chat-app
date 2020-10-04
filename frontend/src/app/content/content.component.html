@@ -1,17 +1,12 @@
 <div class="container">
-  <form (ngSubmit)="sendMessage(input)" #input="ngForm">
-    <label for="message">Type you message here</label>
-    <input required ngModel type="text" name="message" id="message" placeholder="Hello">
-    <button type="submit">Send</button>
-  </form>
+    <form (ngSubmit)="sendMessage(input)" #input="ngForm">
+        <label for="message">Type you message here</label>
+        <input required ngModel type="text" name="message" id="message" placeholder="Hello" />
+        <button type="submit">Send</button>
+    </form>
 </div>
-<!-- <div class="chat-box">
-  <div class="message">
-    <p>Hello</p>
-  </div>
-</div> -->
 
 <div class="chat-container darker" *ngFor="let message of chat">
-  <p>{{message}}</p>
-  <span class="time-left">11:01</span>
+    <p>{{ message }}</p>
+    <span class="time-left">11:01</span>
 </div>
